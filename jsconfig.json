@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "jsx": "preserve",
+    "module": "nodenext",
+    "target": "es6",
+    "allowJs": true,
+    "checkJs": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

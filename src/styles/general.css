@@ -1,0 +1,70 @@
+/**
+ * TYPOGRAPHY
+ * - Font sizes (px)
+ * 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+ *
+ * */
+:root {
+  --main-accent-color: #1971c2;
+  --light-accent-color: #74c0fc;
+  --light-background-color: #e7f5ff;
+  --dark-grey: #222;
+  --rainbow-1: #d0ebff;
+  --rainbow-2: #a5d8ff;
+  --rainbow-3: #74c0fc;
+  --rainbow-4: #4dabf7;
+  --rainbow-5: #339af0;
+  --rainbow-6: #4b7bec;
+  --rainbow-7: #228be6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: var(--dark-grey);
+  line-height: 1;
+  overflow-x: hidden;
+}
+
+p {
+  margin: 0;
+}
+
+#root {
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+input,
+select {
+  font-family: inherit;
+  font-size: 1.6rem;
+  padding: 0.8rem;
+  border: 1px solid var(--dark-grey);
+  border-radius: 0.5rem;
+  height: 3.6rem;
+}
+
+input:focus,
+select:focus {
+  outline: transparent !important;
+  border: 0.15rem solid var(--main-accent-color);
+}
+
+select {
+  padding: 0.5rem;
+}
+
+iframe {
+  width: 200%;
+  height: 90rem;
+}

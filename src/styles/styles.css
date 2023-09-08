@@ -1,0 +1,262 @@
+.heading-primary,
+.heading-secondary {
+  font-weight: 700;
+}
+.heading-primary {
+  font-size: 3.6rem;
+  letter-spacing: -0.02rem;
+}
+
+.heading-secondary {
+  font-size: 2.4rem;
+  letter-spacing: -0.05rem;
+  margin-bottom: 3rem;
+}
+
+.heading-tertiary {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.03rem;
+}
+
+.btn,
+.btn:link,
+.btn:visited {
+  font-family: inherit;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--dark-grey);
+  background-color: var(--light-background-color);
+  border-radius: 0.6rem;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.1);
+
+  padding: 1rem 1.6rem;
+
+  text-decoration: none;
+  border: 0.2rem solid var(--main-accent-color);
+  cursor: pointer;
+
+  transition: all 0.3s;
+}
+
+.btn:active {
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.05);
+  transform: scale(0.97);
+}
+
+.loader-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+}
+
+.loader-spinner svg {
+  stroke: var(--main-accent-color);
+}
+
+.schedule-info-form .heading-tertiary {
+  grid-column: 1 / -1;
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+}
+
+.box {
+  position: relative;
+  font-size: 1.8rem;
+  color: var(--dark-grey);
+  font-weight: 500;
+
+  border: 0.2rem solid var(--main-accent-color);
+  border-radius: 1rem;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.05);
+  padding: 3rem;
+  margin: 0 auto;
+  margin-bottom: 3rem;
+  max-width: 80rem;
+}
+
+.box .heading-tertiary {
+  margin: 0;
+  margin-bottom: 3rem;
+}
+
+.box p {
+  margin-bottom: 3rem;
+}
+
+.blur {
+  filter: blur(2px);
+}
+
+.schedule-info-form,
+.add-to-calendar-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+
+.schedule-info-form .btn,
+.add-to-calendar-form .btn {
+  grid-column: 2;
+}
+
+.add-to-calendar-form .heading-tertiary {
+  grid-column: 1 / -1;
+}
+
+.sheet-preview-container {
+  position: relative;
+}
+
+iframe {
+  border: 0.3rem solid var(--main-accent-color);
+  padding: 2rem;
+  background-color: var(--light-background-color);
+  border-radius: 1rem;
+  display: block;
+  margin: 0 auto;
+  width: 90vw;
+  height: 60rem;
+  max-width: 120rem;
+}
+
+iframe.loading {
+  filter: blur(2px);
+}
+
+.calendar-event-list {
+  font-size: 1.4rem;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  width: 90vw;
+  margin-bottom: 2rem;
+  justify-content: center;
+  max-width: 120rem;
+  display: grid;
+}
+
+.calendar-event-list li {
+  position: relative;
+  padding: 0;
+  margin: 0.3rem;
+  min-height: 1px;
+  transition: all 0.5s;
+  cursor: default;
+  display: inline-block;
+  width: 14rem;
+}
+
+.calendar-event-list li:hover {
+  transform: scale(1.03);
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.05);
+  transition: 0.3s all;
+}
+
+.calendar-event-list li a,
+.calendar-event-list li a:link,
+.calendar-event-list li a:visited {
+  color: var(--dark-grey);
+  text-decoration: none;
+  transition: 0.3s all;
+}
+
+.calendar-event-list li a:hover {
+  color: var(--main-accent-color);
+}
+
+.calendar-event-list li a,
+.calendar-event-list li p {
+  margin: 0;
+  line-height: 1.2;
+  padding: 0.3rem 1rem;
+}
+
+.calendar-event-list li p:first-child {
+  text-align: center;
+}
+
+.calendar-event-list li ion-icon {
+  display: none;
+}
+
+.calendar-event-container {
+  border: 0.2rem var(--main-accent-color) solid;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.calendar-event-list li.done .calendar-event-container {
+  filter: blur(2px);
+}
+
+.calendar-event-list li.done:hover .calendar-event-container {
+  filter: none;
+}
+
+.calendar-event-list li.done:hover ion-icon {
+  display: none;
+}
+
+.calendar-event-list li.done ion-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  display: block;
+  width: 5rem;
+  height: 5rem;
+  color: #20bf6b;
+  filter: none;
+}
+
+.mon {
+  grid-column: 2;
+}
+.mon p:first-child {
+  background-color: var(--rainbow-1);
+}
+
+.tue {
+  grid-column: 3;
+}
+.tue p:first-child {
+  background-color: var(--rainbow-2);
+}
+
+.wed {
+  grid-column: 4;
+}
+.wed p:first-child {
+  background-color: var(--rainbow-3);
+}
+
+.thu {
+  grid-column: 5;
+}
+.thu p:first-child {
+  background-color: var(--rainbow-4);
+}
+
+.fri {
+  grid-column: 6;
+}
+.fri p:first-child {
+  background-color: var(--rainbow-5);
+}
+
+.sat {
+  grid-column: 7;
+}
+.sat p:first-child {
+  background-color: var(--rainbow-6);
+}
+
+.sun {
+  grid-column: 1;
+}
+.sun p:first-child {
+  background-color: var(--rainbow-7);
+}

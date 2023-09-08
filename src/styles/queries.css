@@ -1,0 +1,50 @@
+@media (max-width: 84em) {
+  /* .calendar-container { */
+  /*   display: grid; */
+  /*   gap: 3rem; */
+  /*   grid-template-columns: 8fr 5fr; */
+  /*   align-items: start; */
+  /* } */
+  /* .calendar-event-list { */
+  /*   padding: 0; */
+  /*   display: block; */
+  /* } */
+  /**/
+  /* .add-to-calendar-form { */
+  /*   margin: 2rem 0; */
+  /* } */
+  /**/
+  /* .calendar-event-list li { */
+  /*   grid-column: 1 !important; */
+  /* } */
+  /**/
+  /* .calendar-event-content { */
+  /*   display: grid; */
+  /*   grid-template-columns: 1fr 1fr; */
+  /* } */
+  /**/
+  /* .calendar-event-content p { */
+  /*   text-align: right; */
+  /*   padding: 1rem; */
+  /* } */
+  /* .calendar-event-content p:first-child { */
+  /*   text-align: left; */
+  /* } */
+}
+
+/* smaller than 960px */
+@media (max-width: 60em) {
+  html {
+    /* 9px / 16px */
+    font-size: 56.25%;
+  }
+  iframe {
+    transform: scale(58%);
+    width: 155vw;
+  }
+}
+@media (max-width: 52em) {
+  html {
+    font-size: 43.75%;
+  }
+}
