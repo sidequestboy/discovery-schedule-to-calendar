@@ -119,7 +119,6 @@ function intersection(intervalOne, intervalTwo) {
     intervalTwo[1],
   ];
 
-  let adjustedIntersection;
   let intersectionStart, intersectionEnd;
 
   intersectionStart = new Date(

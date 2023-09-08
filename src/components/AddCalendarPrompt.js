@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { gapi, calendarScope } from "../utils/google";
 import { authParams } from "../utils/auth";
@@ -15,20 +15,23 @@ export function AddCalendarPrompt({
 }) {
   const calendarId = useRef(null);
 
+  const [authorized, setAuthorized] = useState(false);
   const [existingOrNew, setExistingOrNew] = useState("new");
   const [existingCalendars, setExistingCalendars] = useState([]);
   const [newCalendarName, setNewCalendarName] = useState("Discovery Coffee");
   const [existingCalendarId, setExistingCalendarId] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [finished, setFinished] = useState(false);
 
   // initialize calendar api
-  useEffect(() => {
+  const authorize = () => {
     tokenClient.current.callback = async (res) => {
       if (res.error !== undefined) {
         throw res;
       }
       if (res.access_token !== undefined) {
+        setAuthorized(true);
+        setIsLoading(true);
         token.current = res.access_token;
         gapi.client.setApiKey(authParams.api_key);
         gapi.client.setToken({ access_token: res.access_token });
@@ -46,7 +49,7 @@ export function AddCalendarPrompt({
     tokenClient.current.requestAccessToken({
       scope: calendarScope,
     });
-  }, [token, tokenClient]);
+  };
 
   const addCalendarEvents = async () => {
     setIsLoading(true);
@@ -94,7 +97,17 @@ export function AddCalendarPrompt({
 
   return (
     <PromptBox isLoading={isLoading}>
-      {!finished && (
+      {!authorized && (
+        <>
+          <h3 className="heading-tertiary">
+            To add to your calendar, authorize access:
+          </h3>
+          <button className="btn" onClick={authorize}>
+            Authorize
+          </button>
+        </>
+      )}
+      {!finished && authorized && (
         <form className="add-to-calendar-form">
           <h3 className="heading-tertiary">
             Add to an existing calendar or create new?

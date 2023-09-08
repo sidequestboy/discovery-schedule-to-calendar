@@ -3,8 +3,6 @@ import { google, driveScope } from "../utils/google";
 import { useState } from "react";
 import { PromptBox } from "./PromptBox";
 
-import { BallTriangle } from "react-loader-spinner";
-
 export function PickerPrompt({
   disabled,
   tokenClient,
