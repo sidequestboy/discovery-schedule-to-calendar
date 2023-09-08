@@ -73,6 +73,7 @@
   padding: 3rem;
   margin: 0 auto;
   margin-bottom: 3rem;
+  width: 90vw;
   max-width: 80rem;
 }
 
@@ -110,16 +111,16 @@
   position: relative;
 }
 
-iframe {
+.sheet-preview-container iframe {
+  width: 90vw;
+  max-width: 120rem;
   border: 0.3rem solid var(--main-accent-color);
   padding: 2rem;
   background-color: var(--light-background-color);
   border-radius: 1rem;
   display: block;
   margin: 0 auto;
-  width: 90vw;
   height: 60rem;
-  max-width: 120rem;
 }
 
 iframe.loading {
@@ -206,10 +207,11 @@ iframe.loading {
   left: 50%;
   transform: translate(-50%, -40%);
   display: block;
-  width: 5rem;
-  height: 5rem;
+  max-height: 5rem;
   color: #20bf6b;
   filter: none;
+  height: 100%;
+  width: 5rem;
 }
 
 .mon {

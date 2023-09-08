@@ -38,13 +38,49 @@
     /* 9px / 16px */
     font-size: 56.25%;
   }
-  iframe {
-    transform: scale(58%);
-    width: 155vw;
-  }
 }
 @media (max-width: 52em) {
   html {
     font-size: 43.75%;
+  }
+}
+
+/* smaller than 500px */
+@media (max-width: 32.25em) {
+  .schedule-info-form,
+  .add-to-calendar-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: 1rem;
+  }
+  .schedule-info-form .btn,
+  .add-to-calendar-form .btn {
+    grid-column: 1;
+    margin-top: 1rem;
+  }
+  .schedule-info-form select,
+  .schedule-info-form input,
+  .add-to-calendar-form select,
+  .add-to-calendar-form input {
+    margin-bottom: 1rem;
+  }
+  .calendar-event-list {
+    grid-template-columns: 1fr;
+  }
+  .calendar-event-list li {
+    grid-column: 1;
+    width: 90vw;
+  }
+  .calendar-event-list li .calendar-event-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.5fr;
+  }
+  .calendar-event-list li p,
+  .calendar-event-list li a {
+    display: block;
+  }
+  .calendar-event-list li a {
+    text-align: right;
   }
 }
