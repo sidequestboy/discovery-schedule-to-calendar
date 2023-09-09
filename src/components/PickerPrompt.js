@@ -7,11 +7,11 @@ export function PickerPrompt({
   disabled,
   tokenClient,
   token,
-  setError,
   onPickerSelect: handlePickerSelect,
 }) {
   const [pickerVisible, setPickerVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const openPicker = () => {
     const pickerCallback = (data) => {
       if (data[google.picker.Response.ACTION] === google.picker.Action.PICKED) {
@@ -19,6 +19,7 @@ export function PickerPrompt({
       } else if (
         data[google.picker.Response.ACTION] === google.picker.Action.CANCEL
       ) {
+        setPickerVisible(false);
         setError("User cancelled file picker.");
       }
       setIsLoading(false);
@@ -39,25 +40,32 @@ export function PickerPrompt({
   const handleAuthButtonClick = async () => {
     setIsLoading(true);
     const res = await new Promise((resolve, reject) => {
-      tokenClient.current.scope = driveScope;
-      tokenClient.current.callback = resolve;
-      try {
-        tokenClient.current.requestAccessToken();
-      } catch (e) {
-        reject(e);
-      }
+      tokenClient.current = google.accounts.oauth2.initTokenClient({
+        ...authParams,
+        scope: driveScope,
+        callback: (res) => {
+          setIsLoading(false);
+          if (res && res.access_token) {
+            resolve(res);
+          } else {
+            reject(new Error("Did not receive a token in our response."));
+          }
+        },
+        error_callback: (e) => {
+          console.error(e);
+          setIsLoading(false);
+          setError(e.message);
+        },
+      });
+      tokenClient.current.requestAccessToken();
     });
-    if (res && res.access_token) {
-      token.current = res.access_token;
-      openPicker();
-    } else {
-      throw new Error("Did not receive a token in our response.");
-    }
+    token.current = res.access_token;
+    openPicker();
   };
 
   return (
     !pickerVisible && (
-      <PromptBox isLoading={isLoading}>
+      <PromptBox error={error} isLoading={isLoading}>
         <h3 className="heading-tertiary">Click below to get started!</h3>
         <p>We will sign into your Google account to download the schedule.</p>
         <button

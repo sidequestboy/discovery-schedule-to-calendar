@@ -19,7 +19,6 @@ export default function App() {
   // State
   const [stage, setStage] = useState(0);
   const [shifts, setShifts] = useState([]);
-  const [pickerError, setPickerError] = useState(null);
   const [scheduleInfoFormInput, setScheduleInfoFormInput] = useState({
     name: "",
     store: "blanshard",
@@ -31,15 +30,6 @@ export default function App() {
   // Helper functions
   const incrementStage = () => setStage((stage) => (stage + 1) % 3);
 
-  // Derived State
-  const errors = [
-    {
-      error: pickerError,
-      message: "Error in the file picker",
-      key: 1,
-    },
-  ];
-
   // Event handlers
   const handlePickerSelect = (retrievedDoc) => {
     doc.current = retrievedDoc;
@@ -47,6 +37,7 @@ export default function App() {
   };
   const handleScheduleInfoFormSubmit = async (formInput) => {
     setScheduleInfoFormInput(formInput);
+
     const sheets = await getSheets(doc.current.id);
     const parsedSheets = parseSheetsData(
       sheets,
@@ -66,13 +57,11 @@ export default function App() {
   return (
     <>
       <Header />
-      <ErrorDisplay errors={errors} />
       {stage === 0 && (
         <PickerPrompt
           disabled={!gsiLoaded || !gapiLoaded}
           tokenClient={tokenClient}
           token={token}
-          setError={setPickerError}
           onPickerSelect={handlePickerSelect}
         />
       )}
@@ -107,21 +96,6 @@ function Header() {
       </h1>
       <h2 className="heading-secondary">by Jamie</h2>
     </header>
-  );
-}
-
-function ErrorDisplay({ errors }) {
-  // errors are { message: "bla bla", error: "Error" }
-  return errors.map((error) => <Error error={error} key={error.key} />);
-}
-
-function Error({ error }) {
-  return (
-    error.error && (
-      <p>
-        {error.message}: {error.error}
-      </p>
-    )
   );
 }
 

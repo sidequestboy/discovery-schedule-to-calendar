@@ -168,6 +168,7 @@ function firstIsThisMonth(day, endDate, year, month) {
     return false;
   }
 }
+
 function parseSheetsData(sheetsData, inputName, inputMonth) {
   let shifts = [];
   const inputMonthRegex = /^(?<year>[0-9]+)-(?<month>[0-9]{2})$/;
@@ -191,18 +192,30 @@ function parseSheetsData(sheetsData, inputName, inputMonth) {
   const schedule = sheetsData.map((sheetData) => {
     const dayRow = sheetData.result.values[5];
     const dateRow = sheetData.result.values[6];
-    const namedRow = sheetData.result.values.filter((row) => {
-      return (
-        row.length > 0 &&
-        row[0].toLowerCase().trim() == inputName.toLowerCase().trim()
-      );
-    })[0];
+    const namedRow =
+      sheetData.result.values
+        .filter((row) => {
+          return (
+            row.length > 0 &&
+            row[0].toLowerCase().trim() == inputName.toLowerCase().trim()
+          );
+        })
+        .at(0) || null;
     return {
       dayRow: dayRow,
       dateRow: dateRow,
       namedRow: namedRow,
     };
   });
+  if (schedule.every((val) => val.namedRow === null)) {
+    throw {
+      validationError: {
+        name: `Name "${inputName}" is not on the schedule`,
+        store: null,
+        month: null,
+      },
+    };
+  }
 
   schedule.forEach((week) => {
     const firstIndex = week.dateRow.indexOf("1");

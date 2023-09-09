@@ -21,6 +21,7 @@ export function AddCalendarPrompt({
   const [newCalendarName, setNewCalendarName] = useState("Discovery Coffee");
   const [existingCalendarId, setExistingCalendarId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [finished, setFinished] = useState(false);
 
   // initialize calendar api
@@ -54,17 +55,21 @@ export function AddCalendarPrompt({
   const addCalendarEvents = async () => {
     setIsLoading(true);
     if (existingOrNew === "new") {
-      const createNewCalendarResponse =
-        await gapi.client.calendar.calendars.insert({
+      try {
+        const createNewCalendarResponse =
+          await gapi.client.calendar.calendars.insert({
+            summary: newCalendarName,
+          });
+        calendarId.current = createNewCalendarResponse.result.id;
+        await gapi.client.calendar.calendars.update({
           summary: newCalendarName,
+          calendarId: calendarId.current,
+          timeZone: "America/Vancouver",
+          description: "Schedule at Discovery Coffee",
         });
-      calendarId.current = createNewCalendarResponse.result.id;
-      await gapi.client.calendar.calendars.update({
-        summary: newCalendarName,
-        calendarId: calendarId.current,
-        timeZone: "America/Vancouver",
-        description: "Schedule at Discovery Coffee",
-      });
+      } catch (e) {
+        setError(`Couldn't create new calendar ${newCalendarName}`);
+      }
     } else {
       calendarId.current = existingCalendarId;
     }
@@ -73,7 +78,6 @@ export function AddCalendarPrompt({
     for (let i = 0; i < shifts.length; i++) {
       let count = 0;
       while (count < maxTries) {
-        count++;
         try {
           await createEvent(shifts[i], store, calendarId.current);
           setShifts((shifts) =>
@@ -86,9 +90,14 @@ export function AddCalendarPrompt({
         } catch (e) {
           console.error("Error creating event", e);
           await new Promise((resolve) => setTimeout(resolve, 100));
+          count++;
         }
       }
       await new Promise((resolve) => setTimeout(resolve, 100));
+      if (count === maxTries) {
+        setError("Exceeded max tries of creating calendar event - aborting.");
+        break;
+      }
     }
 
     setIsLoading(false);
@@ -96,7 +105,7 @@ export function AddCalendarPrompt({
   };
 
   return (
-    <PromptBox isLoading={isLoading}>
+    <PromptBox error={error} isLoading={isLoading}>
       {!authorized && (
         <>
           <h3 className="heading-tertiary">

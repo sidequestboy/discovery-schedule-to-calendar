@@ -103,6 +103,35 @@
   grid-column: 2;
 }
 
+.schedule-info-form .error,
+.add-to-calendar-form .error {
+  background-color: var(--error-color);
+  padding: 0.3rem;
+  border-radius: 0.3rem;
+  font-weight: 700;
+  grid-column: 1 / -1;
+  justify-self: right;
+  margin-bottom: 1rem;
+}
+
+.schedule-info-form .error span,
+.add-to-calendar-form .error span,
+.schedule-info-form .error ion-icon,
+.add-to-calendar-form .error ion-icon {
+  vertical-align: middle;
+}
+
+.schedule-info-form .error ion-icon,
+.add-to-calendar-form .error ion-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.schedule-info-form .invalid,
+.add-to-calendar-form .invalid {
+  border: 0.2rem solid var(--error-color);
+}
+
 .add-to-calendar-form .heading-tertiary {
   grid-column: 1 / -1;
 }
