@@ -21,19 +21,9 @@
   },
   "eslintConfig": {
     "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended",
-      "prettier"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint"
-    ],
-    "root": true,
-    "rules": {
-      "no-undef": "off",
-      "no-redeclare": "off"
-    }
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
