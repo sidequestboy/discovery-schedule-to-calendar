@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 export const google = (window.google = window.google ? window.google : {});
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 export const gapi = (window.gapi = window.gapi ? window.gapi : {});
 
