@@ -7,7 +7,7 @@ export function PromptBox({ error, isLoading, children }) {
         {error ? (
           <>
             <p className="error">{error}</p>
-            <button className="btn" onClick={() => location.reload()}>
+            <button className="btn" onClick={() => window.location.reload()}>
               Start over
             </button>
           </>

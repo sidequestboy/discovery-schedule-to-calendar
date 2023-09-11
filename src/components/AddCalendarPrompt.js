@@ -189,7 +189,7 @@ export function AddCalendarPrompt({
               Calendar
             </a>
           </p>
-          <button className="btn" onClick={() => location.reload()}>
+          <button className="btn" onClick={() => window.location.reload()}>
             Start over?
           </button>
         </>
