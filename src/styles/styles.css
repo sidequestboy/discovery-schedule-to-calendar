@@ -176,7 +176,7 @@ iframe.loading {
   transition: all 0.5s;
   cursor: default;
   display: inline-block;
-  width: 14rem;
+  width: 15rem;
 }
 
 .calendar-event-list li:hover {
