@@ -19,7 +19,6 @@ export function AddCalendarPrompt({
   const [existingOrNew, setExistingOrNew] = useState("new");
   const [existingCalendars, setExistingCalendars] = useState([]);
   const [newCalendarName, setNewCalendarName] = useState("Discovery Coffee");
-  const [existingCalendarId, setExistingCalendarId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [finished, setFinished] = useState(false);
@@ -43,7 +42,13 @@ export function AddCalendarPrompt({
         request.execute();
         const response = await request;
         const calendars = response.result.items;
-        setExistingCalendars(calendars);
+        const filteredCalendars = calendars
+          .filter(
+            (cal) => cal.accessRole === "writer" || cal.accessRole === "owner"
+          )
+          .sort((a) => a.primary);
+        calendarId.current = filteredCalendars.at(0).id;
+        setExistingCalendars(filteredCalendars);
         setIsLoading(false);
       }
     };
@@ -70,8 +75,6 @@ export function AddCalendarPrompt({
       } catch (e) {
         setError(`Couldn't create new calendar ${newCalendarName}`);
       }
-    } else {
-      calendarId.current = existingCalendarId;
     }
 
     const maxTries = 20;
@@ -139,23 +142,19 @@ export function AddCalendarPrompt({
               </label>
               <select
                 id="existing-calendars"
-                onChange={(e) => setExistingCalendarId(e.target.value)}
+                onChange={(e) => {
+                  calendarId.current = e.target.value;
+                }}
               >
-                {existingCalendars
-                  .filter(
-                    (cal) =>
-                      cal.accessRole === "writer" || cal.accessRole === "owner"
-                  )
-                  .sort((a) => a.primary)
-                  .map((cal) => (
-                    <option
-                      style={{ backgroundColor: cal.backgroundColor }}
-                      value={cal.id}
-                      key={cal.id}
-                    >
-                      {cal.summary}
-                    </option>
-                  ))}
+                {existingCalendars.map((cal) => (
+                  <option
+                    style={{ backgroundColor: cal.backgroundColor }}
+                    value={cal.id}
+                    key={cal.id}
+                  >
+                    {cal.summary}
+                  </option>
+                ))}
               </select>
             </>
           )}

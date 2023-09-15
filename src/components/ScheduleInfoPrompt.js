@@ -3,6 +3,7 @@ import { PromptBox } from "./PromptBox";
 
 import { IonIcon } from "@ionic/react";
 import { alertCircleOutline } from "ionicons/icons";
+import { ValidationError } from "../utils/util";
 
 export function ScheduleInfoPrompt({ doc, onFormSubmit: handleFormSubmit }) {
   const [formInput, setFormInput] = useState({
@@ -76,9 +77,9 @@ export function ScheduleInfoPrompt({ doc, onFormSubmit: handleFormSubmit }) {
             try {
               await handleFormSubmit(formInput);
             } catch (e) {
-              if (e.validationError) {
+              if (e instanceof ValidationError) {
                 console.error(e);
-                setValidationError(e.validationError);
+                setValidationError(e);
               } else {
                 setError(e);
               }

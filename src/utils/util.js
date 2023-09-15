@@ -169,6 +169,15 @@ function firstIsThisMonth(day, endDate, year, month) {
   }
 }
 
+export class ValidationError extends Error {
+  constructor(message, { name, store, month }) {
+    super(message);
+    this.name = name;
+    this.store = store;
+    this.month = month;
+  }
+}
+
 function parseSheetsData(sheetsData, inputName, inputMonth) {
   let shifts = [];
   const inputMonthRegex = /^(?<year>[0-9]+)-(?<month>[0-9]{2})$/;
@@ -197,7 +206,7 @@ function parseSheetsData(sheetsData, inputName, inputMonth) {
         .filter((row) => {
           return (
             row.length > 0 &&
-            row[0].toLowerCase().trim() == inputName.toLowerCase().trim()
+            row[0].toLowerCase().trim() === inputName.toLowerCase().trim()
           );
         })
         .at(0) || null;
@@ -208,13 +217,11 @@ function parseSheetsData(sheetsData, inputName, inputMonth) {
     };
   });
   if (schedule.every((val) => val.namedRow === null)) {
-    throw {
-      validationError: {
-        name: `Name "${inputName}" is not on the schedule`,
-        store: null,
-        month: null,
-      },
-    };
+    throw new ValidationError(`Name "${inputName}" is not on the schedule`, {
+      name: `Name "${inputName}" is not on the schedule`,
+      store: null,
+      month: null,
+    });
   }
 
   schedule.forEach((week) => {
