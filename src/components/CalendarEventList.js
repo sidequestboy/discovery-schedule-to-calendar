@@ -50,7 +50,7 @@ function CalendarEvent({ start, end, checked }) {
       <li className={`${dayClass} ${checked ? "done" : ""}`}>
         <div className="calendar-event-container">
           <p>{day}</p>
-          <a href={getCalendarLink(start)} target="_blank">
+          <a href={getCalendarLink(start)} target="_blank" rel="noreferrer">
             🗓️ {date}
           </a>
           <p>

@@ -185,7 +185,11 @@ export function AddCalendarPrompt({
         <>
           <p>Finished!</p>
           <p>
-            <a href={getCalendarLink(shifts.at(0).startTime)} target="_blank">
+            <a
+              href={getCalendarLink(shifts.at(0).startTime)}
+              rel="noreferrer"
+              target="_blank"
+            >
               Calendar
             </a>
           </p>
