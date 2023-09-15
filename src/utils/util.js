@@ -15,7 +15,7 @@ function createTime(hours, minutes) {
 // formatted and date is of the form "2023-03-01"
 function toDateAndTime(dateString, startTimeString, endTimeString) {
   const dayTimeHours = [createTime(6, 0), createTime(18, 0)];
-  const timeRegex = /^.*(?<hour>[0-9]{1,2}):(?<minute>[0-9]{2}).*$/;
+  const timeRegex = /^.*?(?<hour>[0-9]{1,2}):(?<minute>[0-9]{2}).*$/;
   const startTimeMatch = startTimeString.match(timeRegex);
   const endTimeMatch = endTimeString.match(timeRegex);
   if (startTimeMatch === null || endTimeMatch === null) {
