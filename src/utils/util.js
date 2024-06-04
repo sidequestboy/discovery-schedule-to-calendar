@@ -54,7 +54,7 @@ function toDateAndTime(dateString, startTimeString, endTimeString) {
     if (shift[0].getTime() < shift[1].getTime()) {
       // am, am or pm, pm
       const pmpmShift = shift.map((t) =>
-        createTime(t.getHours() + 12, t.getMinutes())
+        createTime(t.getHours() + 12, t.getMinutes()),
       );
       const amamIntersection = intersection(shift, dayTimeHours);
       const pmpmIntersection = intersection(pmpmShift, dayTimeHours);
@@ -122,10 +122,16 @@ function intersection(intervalOne, intervalTwo) {
   let intersectionStart, intersectionEnd;
 
   intersectionStart = new Date(
-    Math.max(adjustedIntervalOne[0].getTime(), adjustedIntervalTwo[0].getTime())
+    Math.max(
+      adjustedIntervalOne[0].getTime(),
+      adjustedIntervalTwo[0].getTime(),
+    ),
   );
   intersectionEnd = new Date(
-    Math.min(adjustedIntervalOne[1].getTime(), adjustedIntervalTwo[1].getTime())
+    Math.min(
+      adjustedIntervalOne[1].getTime(),
+      adjustedIntervalTwo[1].getTime(),
+    ),
   );
 
   if (intersectionStart.getTime() > intersectionEnd.getTime()) {
@@ -135,13 +141,13 @@ function intersection(intervalOne, intervalTwo) {
   if (intersectionStart.getDate() !== 1) {
     intersectionStart = createTime(
       intersectionStart.getHours(),
-      intersectionStart.getMinutes()
+      intersectionStart.getMinutes(),
     );
   }
   if (intersectionEnd.getDate() !== 1) {
     intersectionEnd = createTime(
       intersectionEnd.getHours(),
-      intersectionEnd.getMinutes()
+      intersectionEnd.getMinutes(),
     );
   }
 
@@ -278,7 +284,7 @@ function parseSheetsData(sheetsData, inputName, inputMonth) {
             Number(date) < 10 ? 0 : ""
           }${date}`,
           startTimes[i],
-          endTimes[i]
+          endTimes[i],
         );
         if (shift !== null && shift.length === 2) {
           shifts.push(shift);

@@ -42,14 +42,14 @@ export default function App() {
     const parsedSheets = parseSheetsData(
       sheets,
       formInput.name,
-      formInput.month
+      formInput.month,
     );
     setShifts(
       parsedSheets.map((shift) => ({
         startTime: shift[0],
         endTime: shift[1],
         eventAdded: false,
-      }))
+      })),
     );
     incrementStage();
   };
