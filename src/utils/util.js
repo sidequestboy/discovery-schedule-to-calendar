@@ -205,8 +205,14 @@ function parseSheetsData(sheetsData, inputName, inputMonth) {
   const lastMonthDate = createMonthDate(month - 1);
   const nextMonthDate = createMonthDate(month + 1);
   const schedule = sheetsData.map((sheetData) => {
-    const dayRow = sheetData.result.values[5];
-    const dateRow = sheetData.result.values[6];
+    // const dayRow = sheetData.result.values[5];
+    const dayRowIndex =
+      sheetData.result.values.findIndex((row) => {
+        return row.length > 1 && row[1].toLowerCase().trim() === "monday";
+      }) || null;
+    console.log(dayRowIndex);
+    const dayRow = sheetData.result.values[dayRowIndex];
+    const dateRow = sheetData.result.values[dayRowIndex + 1];
     const namedRow =
       sheetData.result.values
         .filter((row) => {
